@@ -1,15 +1,20 @@
 package org.example;
 
 public class Main {
+
     public static void main(String[] args) {
         PromptCleanConsumer consumer = new PromptCleanConsumer("prompt.clean");
-        InferenceRequestProducer producer = new InferenceRequestProducer("inference.request");
+        InferenceRequestProducer producer = new InferenceRequestProducer(
+            "inference.request"
+        );
 
-        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
-            System.out.println("Shutting down..");
-            consumer.close();
-            producer.close();
-        }));
+        Runtime.getRuntime().addShutdownHook(
+                new Thread(() -> {
+                    System.out.println("Shutting down..");
+                    consumer.close();
+                    producer.close();
+                })
+            );
 
         System.out.printf("Starting Dispatch..");
 
@@ -27,4 +32,3 @@ public class Main {
         }
     }
 }
-
