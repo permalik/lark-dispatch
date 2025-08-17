@@ -5,9 +5,14 @@ import java.util.Collections;
 import java.util.Properties;
 import org.apache.kafka.clients.consumer.*;
 import org.apache.kafka.common.serialization.StringDeserializer;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PromptCleanConsumer {
 
+    private static final Logger logger = LoggerFactory.getLogger(
+        PromptCleanConsumer.class
+    );
     private final KafkaConsumer<String, String> consumer;
 
     public PromptCleanConsumer(String topic) {
@@ -32,8 +37,8 @@ public class PromptCleanConsumer {
             Duration.ofMillis(2)
         );
         for (ConsumerRecord<String, String> record : records) {
-            System.out.printf(
-                "Consumed: key=%s, value=%s, offset=%s",
+            logger.info(
+                "Consumed: key={}, value={}, offset={}",
                 record.key(),
                 record.value(),
                 record.offset()
