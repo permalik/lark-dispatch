@@ -1,0 +1,12 @@
+services:
+  lark-dispatch:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lark_dispatch
+    ports:
+      - "8002:8002"
+
+networks:
+  lark-network:
+    external: true
